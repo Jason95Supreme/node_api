@@ -1,12 +1,19 @@
 const express = require('express')
 const app = express()
-// app.use('/', function() {
-//     console.log('访问中。。。')
-// })
+const router = express().router()
+const path = require('path')
+const fs = require('fs')
 
-app.get('/', function(req, res) {
-    // res.send('hello')
-    res.json('hh')
-    console.log('我是get方法')
-})
+router.use(function(req, res, next) {
+    // .. some logic here .. like any other middleware
+    next();
+  });
+  
+  // will handle any request that ends in /events
+  // depends on where the router is "use()'d"
+router.get('/events', function(req, res, next) {
+// ..
+});
+
+app.use('/calendar', router);
 app.listen(3000, () => console.log('Example app listening on port 3000!'))
